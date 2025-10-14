@@ -4,32 +4,56 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
+enum ButtonIconPosition { left, right }
 enum ButtonTextIconType { primary, secondary, custom }
 
-class ButtonTextIcon extends StatelessWidget {
-/// Atomic Design System: Gradient Text Button
+/// {@template button_text_icon}
+/// A [ButtonTextIcon] molecule for the Book Stack Design System.
+/// Provides a customizable button with text and optional icon, supporting gradient borders, backgrounds, and multiple style variants.
 ///
-/// This widget is part of an atomic design system for Flutter, providing a highly customizable button with gradient borders and backgrounds.
+/// ### Atomic Level
+/// **Molecule** – Composed UI unit in the Atomic Design System.
 ///
-/// - Follows atomic design principles for scalability and maintainability.
-/// - All documentation is provided inside the class for global visibility, as recommended by Flutter standards.
-/// - Supports multiple button types via the [ButtonTextIconType] enum: primary, secondary, custom.
-/// - Uses design tokens for colors and gradients, ensuring consistency across the app.
+/// ### Parameters
+/// - `icon`: Optional icon to display alongside the text.
+/// - `iconPosition`: Position of the icon (left or right of the text).
+/// - `textWidget`: Widget to display as button content. If provided, overrides [text].
+/// - `text`: The label displayed inside the button.
+/// - `type`: The button style variant, defined by [ButtonTextIconType].
+/// - `width`: The width of the button.
+/// - `height`: The height of the button.
+/// - `onPressed`: Callback executed when the button is tapped.
+/// - `paddingButton`: Internal padding for the button.
+/// - `paddingContent`: Internal padding for the button content.
+/// - `textAlign`: Alignment for the button text.
+/// - `textStyle`: Custom text style for the label.
+/// - `borderWidth`: Width of the button border.
+/// - `borderRadius`: Border radius for rounded corners.
+/// - `boxShadow`: List of shadows applied to the button.
+/// - `gradientBorder`: Custom gradient border for the button.
+/// - `backgroundGradientColor`: Custom gradient for the background.
+/// - `backgroundColor`: Solid background color (used if no gradient).
+/// - `hoverColor`: Hover color for interactive states.
+/// - `splashColor`: Splash color for interactive states.
+/// - `focusColor`: Focus color for interactive states.
+/// - `highlightColor`: Highlight color for interactive states.
 ///
-/// Example usage:
+/// ### Returns
+/// Renders a button with text and optional icon, supporting gradient borders, backgrounds, and style variants for atomic design systems.
+///
+/// ### Example
 /// ```dart
 /// ButtonTextIcon(
 ///   text: 'Subscribe',
 ///   type: ButtonTextIconType.primary,
 ///   onPressed: () {},
+///   icon: Icon(Icons.star),
+///   iconPosition: ButtonIconPosition.left,
 /// )
 /// ```
-///
-/// [ButtonTextIconType.primary]: Main action button with gradient border, background, and shadow.
-/// [ButtonTextIconType.secondary]: Secondary action button with radial gradient background and gradient border.
-/// [ButtonTextIconType.tertiary]: Tertiary button with solid background and no shadow.
-/// [ButtonTextIconType.inactive]: Disabled/inactive button style.
-/// [ButtonTextIconType.custom]: Fully custom style via parameters.
+/// {@endtemplate}
+class ButtonTextIcon extends StatelessWidget {
+  /// {@macro button_text_icon}
   const ButtonTextIcon({
     super.key,
     this.textWidget,
@@ -52,7 +76,14 @@ class ButtonTextIcon extends StatelessWidget {
     this.splashColor,
     this.focusColor,
     this.highlightColor,
+    this.icon,
+    this.iconPosition = ButtonIconPosition.left,
   });
+
+  /// Optional icon to display alongside the text.
+  final Widget? icon;
+  /// Position of the icon: left or right of the text.
+  final ButtonIconPosition iconPosition;
 
   /// The widget to display as button content. If provided, overrides [text].
   final Widget? textWidget;
@@ -72,7 +103,7 @@ class ButtonTextIcon extends StatelessWidget {
   /// Callback executed when the button is tapped.
   final VoidCallback? onPressed;
 
-  /// Internal padding for the button
+  /// Internal padding for the button.
   final EdgeInsetsGeometry? paddingButton;
   
   /// Internal padding for the button content.
@@ -122,7 +153,7 @@ class ButtonTextIcon extends StatelessWidget {
     switch (type) {
       case ButtonTextIconType.primary:
         backgroundC = Theme.of(context).colorScheme.primary;
-        style = textStyle ?? GoogleFonts.roboto( 
+        style = textStyle ?? GoogleFonts.inter( 
           textStyle: TextStyle(
             color: Theme.of(context).colorScheme.onPrimary,
             fontSize: BookStackScreenSize.fontSize(context, 16),
@@ -131,7 +162,7 @@ class ButtonTextIcon extends StatelessWidget {
         );
       case ButtonTextIconType.secondary:
         backgroundC = Theme.of(context).colorScheme.secondary;
-        style = textStyle ?? GoogleFonts.roboto(
+        style = textStyle ?? GoogleFonts.inter(
           textStyle: TextStyle(
             color: Theme.of(context).colorScheme.onSecondary,
             fontSize: BookStackScreenSize.fontSize(context, 16),
@@ -158,12 +189,33 @@ class ButtonTextIcon extends StatelessWidget {
       onPressed: onPressed,
       child: Padding(
         padding: paddingContent ?? BookStackScreenSize.symmetric(context, horizontal: 24, vertical: 16),
-        child: textWidget ?? Text(
-          text,
-          textAlign: textAlign ?? TextAlign.center,
-          maxLines: null,
-          softWrap: true,
-          style: style,
+        child: textWidget ?? Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: icon != null
+              ? (iconPosition == ButtonIconPosition.left
+                  ? <Widget>[icon!, const SizedBox(width: 8), Text(
+                      text,
+                      textAlign: textAlign ?? TextAlign.center,
+                      maxLines: null,
+                      softWrap: true,
+                      style: style,
+                    )]
+                  : <Widget>[Text(
+                      text,
+                      textAlign: textAlign ?? TextAlign.center,
+                      maxLines: null,
+                      softWrap: true,
+                      style: style,
+                    ), const SizedBox(width: 8), icon!])
+              : <Widget>[Text(
+                  text,
+                  textAlign: textAlign ?? TextAlign.center,
+                  maxLines: null,
+                  softWrap: true,
+                  style: style,
+                )],
         ),
       ),
     );
