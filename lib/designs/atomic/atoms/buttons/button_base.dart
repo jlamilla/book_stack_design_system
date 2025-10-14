@@ -3,24 +3,45 @@ import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
 /// {@template button_base}
-/// Native Flutter button with borders, part of the atomic design system.
-/// Highly customizable, with sensible defaults matching design tokens.
-///
-/// Default styles:
-/// - Border: 1.06px solid gradient (vertical, darkBlue to blue)
-/// - Box shadow: 4.24px 4.24px 59.36px 0px shadowBlue
-/// - Background color: text
-///
-/// Example usage:
+/// A fundamental [ButtonBase] atom in the Book Stack Design System.
+/// 
+/// ### Atomic Level
+/// **Atom** – Smallest reusable UI component.
+/// 
+/// ### Overview
+/// Provides a highly customizable button for atomic-level interactions, supporting gradients, shadows, and responsive sizing.
+/// 
+/// ### Parameters
+/// - `child`: The widget displayed inside the button (typically text or icon).
+/// - `onPressed`: Callback executed when the button is tapped.
+/// - `width`: The width of the button.
+/// - `height`: The height of the button.
+/// - `backgroundColor`: The background color of the button.
+/// - `hoverColor`: The color when the button is hovered.
+/// - `splashColor`: The splash color on tap.
+/// - `focusColor`: The color when the button is focused.
+/// - `highlightColor`: The color when the button is highlighted.
+/// - `gradientBorder`: Optional gradient border for visual emphasis.
+/// - `borderRadius`: The border radius for rounded corners.
+/// - `boxShadow`: List of shadows for elevation effects.
+/// - `padding`: Padding inside the button.
+/// 
+/// ### Returns
+/// A tappable, customizable [Widget] suitable for atomic design usage.
+/// 
+/// ### Example
 /// ```dart
 /// ButtonBase(
+///   child: Text('Click Me'),
 ///   onPressed: () {},
-///   child: Text('Button'),
+///   backgroundColor: Colors.blue,
+///   borderRadius: 8,
 /// )
 /// ```
 /// {@endtemplate}
+
+/// {@macro button_base}
 class ButtonBase extends StatelessWidget {
-  /// Creates a button with borders and custom styles.
   const ButtonBase({
     super.key,
     required this.child,
@@ -38,62 +59,70 @@ class ButtonBase extends StatelessWidget {
     this.padding,
   });
 
-  /// Callback when the button is pressed.
-  final VoidCallback? onPressed;
-
-  /// Button content.
+  /// The widget displayed inside the button (typically text or icon).
   final Widget child;
 
-  /// Width of the button.
+  /// Callback executed when the button is tapped.
+  final VoidCallback? onPressed;
+
+  /// The width of the button.
   final double? width;
 
-  /// Height of the button.
+  /// The height of the button.
   final double? height;
 
-  /// Background color.
+  /// The background color of the button.
   final Color? backgroundColor;
 
-  /// Hover color.
+  /// The color when the button is hovered.
   final Color? hoverColor;
 
-  /// Splash color.
+  /// The splash color on tap.
   final Color? splashColor;
 
-  /// Focus color.
+  /// The color when the button is focused.
   final Color? focusColor;
 
-  /// Highlight color.
+  /// The color when the button is highlighted.
   final Color? highlightColor;
 
-  /// Gradient for the border.
+  /// Optional gradient border for visual emphasis.
   final GradientBoxBorder? gradientBorder;
 
-  /// Border radius.
+  /// The border radius for rounded corners.
   final double? borderRadius;
 
-  /// Box shadow(s).
+  /// List of shadows for elevation effects.
   final List<BoxShadow>? boxShadow;
 
   /// Padding inside the button.
   final EdgeInsetsGeometry? padding;
-
+  
   @override
   Widget build(BuildContext context) {
+    final BorderRadius? border = borderRadius != null
+        ? BorderRadius.circular(BookStackScreenSize.radius(context, borderRadius!))
+        : null;
+
     return InkWell(
       splashColor: splashColor,
       highlightColor: highlightColor,
       focusColor: focusColor,
       hoverColor: hoverColor,
+      borderRadius: border,
       onTap: onPressed,
       child: Padding(
         padding: padding ?? EdgeInsetsGeometry.zero,
         child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: height ?? BookStackScreenSize.height(context, 29)),
+          constraints: BoxConstraints(
+            minHeight: height ?? BookStackScreenSize.height(context, 29),
+          ),
           child: Container(
-            width: width ?? double.infinity,
+            height: height,
+            width: width,
             decoration: BoxDecoration(
               color: backgroundColor,
-              borderRadius: borderRadius != null ? BorderRadius.circular(borderRadius!) : null,
+              borderRadius: border,
               boxShadow: boxShadow,
               border: gradientBorder,
             ),
