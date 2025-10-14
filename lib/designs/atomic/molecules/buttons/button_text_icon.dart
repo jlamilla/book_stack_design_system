@@ -195,27 +195,27 @@ class ButtonTextIcon extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: icon != null
               ? (iconPosition == ButtonIconPosition.left
-                  ? <Widget>[icon!, const SizedBox(width: 8), Text(
+                  ? <Widget>[icon!, const SizedBox(width: 8), Expanded(child: Text(
                       text,
                       textAlign: textAlign ?? TextAlign.center,
                       maxLines: null,
                       softWrap: true,
                       style: style,
-                    )]
-                  : <Widget>[Text(
+                    ))]
+                  : <Widget>[Expanded(child: Text(
                       text,
                       textAlign: textAlign ?? TextAlign.center,
                       maxLines: null,
                       softWrap: true,
                       style: style,
-                    ), const SizedBox(width: 8), icon!])
-              : <Widget>[Text(
+                    )), const SizedBox(width: 8), icon!])
+              : <Widget>[Expanded(child: Text(
                   text,
                   textAlign: textAlign ?? TextAlign.center,
                   maxLines: null,
                   softWrap: true,
                   style: style,
-                )],
+                ))],
         ),
       ),
     );

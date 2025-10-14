@@ -40,6 +40,7 @@ flutter:
     - lib/assets/colors/
     - lib/assets/icons/
     - lib/assets/images/
+  uses-material-design: true
 
 flutter_gen:
   output: lib/designs/atomic/tokens/src/gen

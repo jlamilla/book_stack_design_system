@@ -52,18 +52,25 @@ class InformativeComponent extends StatelessWidget {
 
   /// The informative state type (search, error, addData, custom).
   final InformativeComponentType type;
+
   /// Optional title text for the informative message.
   final String? title;
+
   /// Optional subtitle text for additional information.
   final String? subTitle;
+
   /// Custom text style for title and subtitle.
   final TextStyle? textStyle;
+
   /// Padding around the informative content.
   final EdgeInsetsGeometry? padding;
+
   /// Custom image or icon widget for the informative state.
   final Widget? image;
+
   /// Height of the image/icon. Defaults to 200.
   final double? imageHeight;
+
   /// Width of the image/icon. Defaults to 120.
   final double? imageWidth;
 
@@ -83,7 +90,8 @@ class InformativeComponent extends StatelessWidget {
           fit: BoxFit.cover,
         );
         displayTextTitle = title ?? 'There are no matches for the search.';
-        displayTextSubTitle = subTitle ?? 'Try different keywords or check your spelling.';
+        displayTextSubTitle =
+            subTitle ?? 'Try different keywords or check your spelling.';
       case InformativeComponentType.error:
         imageWidget = BookStackAssets.lib.assets.icons.errorBook.svg(
           color: BookStackTheme.iconColor(context),
@@ -92,7 +100,8 @@ class InformativeComponent extends StatelessWidget {
           width: imageWidth,
           fit: BoxFit.cover,
         );
-        displayTextTitle = title ?? 'An error occurred while searching for books.';
+        displayTextTitle =
+            title ?? 'An error occurred while searching for books.';
         displayTextSubTitle = subTitle ?? 'Please try again later.';
       case InformativeComponentType.addData:
         imageWidget = BookStackAssets.lib.assets.icons.favoriteAdd.svg(
@@ -109,36 +118,40 @@ class InformativeComponent extends StatelessWidget {
         displayTextTitle = title ?? '';
         displayTextSubTitle = subTitle ?? '';
     }
-    return Expanded(
-      child: Center(
-        child: Padding(
-          padding: padding ?? BookStackScreenSize.fromLTRB(
-            context,
-            left: 24,
-            right: 24,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              imageWidget,
-              Gap(BookStackScreenSize.height(context, 20)),
-              BookStackText(
-                text: displayTextTitle,
-                style: textStyle ?? Theme.of(context).textTheme.headlineSmall,
-                textAlign: TextAlign.center,
-                overflow: null,
-                maxLines: null,
-              ),
-              Gap(BookStackScreenSize.height(context, 8)),
-              Text(
-                displayTextSubTitle,
-                style: textStyle ?? Theme.of(context).textTheme.bodyMedium,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
+    final Widget content = Center(
+      child: Padding(
+        padding:
+            padding ??
+            BookStackScreenSize.fromLTRB(context, left: 24, right: 24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            imageWidget,
+            Gap(BookStackScreenSize.height(context, 20)),
+            BookStackText(
+              text: displayTextTitle,
+              style: textStyle ?? Theme.of(context).textTheme.headlineSmall,
+              textAlign: TextAlign.center,
+              overflow: null,
+              maxLines: null,
+            ),
+            Gap(BookStackScreenSize.height(context, 8)),
+            Text(
+              displayTextSubTitle,
+              style: textStyle ?? Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ),
     );
+    final Flex? flexParent = context.findAncestorWidgetOfExactType<Flex>();
+    if (flexParent != null) {
+      return Expanded(child: content);
+    } else if (context.findAncestorWidgetOfExactType<SliverToBoxAdapter>() != null) {
+      return content;
+    } else {
+      return content;
+    }
   }
 }

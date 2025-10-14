@@ -255,67 +255,67 @@ class _BooksListInfoTemplateState<T> extends State<BooksListInfoTemplate<T>> {
                 ),
               ),
             ),
-          if (widget.isFavorite && _books.isEmpty && !widget.isLoading && !widget.error) 
+          if (widget.error && _books.isEmpty)
+            const SliverToBoxAdapter(
+              child: InformativeComponent(type: InformativeComponentType.error),
+            ),
+          if (widget.isFavorite && _books.isEmpty && !widget.isLoading && !widget.error)
             const SliverToBoxAdapter(
               child: InformativeComponent(
                 type: InformativeComponentType.addData,
-              )
-            ),
-          SliverPadding(
-            padding: widget.style.gridPadding ?? BookStackScreenSize.fromLTRB(
-              context,
-              top: (widget.visibilityFavorite || widget.visibilitySorts) ? 0 : 60 + MediaQuery.of(context).padding.top,
-              right: 24,
-              left: 24,
-              bottom: 16,
-            ),
-            sliver: SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: widget.crossAxisCount,
-                mainAxisSpacing: widget.style.mainAxisSpacing ?? BookStackScreenSize.width(context, 16),
-                crossAxisSpacing: widget.style.crossAxisSpacing ?? BookStackScreenSize.width(context, 16),
-                childAspectRatio: widget.style.childAspectRatio,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  if (widget.isLoading) {
-                    return SkeletonCard(
-                      height: widget.style.cardHeight,
-                      width: widget.style.cardWidth,
-                      borderRadius: BorderRadius.all(Radius.circular(BookStackScreenSize.radius(context, widget.style.cardBorderRadius))),
-                    );
-                  }
-                  if (widget.error) {
-                    return const InformativeComponent(
-                      type: InformativeComponentType.error,
-                    );
-                  }
-                  final T book = _books[index];
-                  return BookInfoCard(
-                    key: ValueKey<String>(widget.getIdBook(book)),
-                    title: widget.getTitleBook(book),
-                    subTitle: widget.getSubTitleBook(book),
-                    imageUrl: widget.getImageUrlBook(book),
-                    price: widget.getPriceBook(book),
-                    onTapDetailsBook: () => widget.onTapDetailsBook(book),
-                    cardHeight: widget.style.cardHeight,
-                    cardWidth: widget.style.cardWidth,
-                    cardBorderRadius: widget.style.cardBorderRadius,
-                    imageBorderRadius: widget.style.imageBorderRadius,
-                    imageErrorPlaceholder: widget.style.imageErrorPlaceholder,
-                    imageHeight: widget.style.imageHeight,
-                    imagePlaceholder: widget.style.imagePlaceholder,
-                    imagePosition: widget.style.imagePosition,
-                    imageWidth: widget.style.imageWidth,
-                    paddingContent: widget.style.paddingContent,
-                    paddingDescription: widget.style.paddingDescription,
-                    paddingImage: widget.style.paddingImage,
-                  );
-                },
-                childCount: widget.isLoading ? 6 : _books.length,
               ),
             ),
-          ),
+          if (_books.isNotEmpty || widget.isLoading)
+            SliverPadding(
+              padding: widget.style.gridPadding ?? BookStackScreenSize.fromLTRB(
+                context,
+                top: (widget.visibilityFavorite || widget.visibilitySorts) ? 0 : 60 + MediaQuery.of(context).padding.top,
+                right: 24,
+                left: 24,
+                bottom: 16,
+              ),
+              sliver: SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: widget.crossAxisCount,
+                  mainAxisSpacing: widget.style.mainAxisSpacing ?? BookStackScreenSize.width(context, 16),
+                  crossAxisSpacing: widget.style.crossAxisSpacing ?? BookStackScreenSize.width(context, 16),
+                  childAspectRatio: widget.style.childAspectRatio,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    if (widget.isLoading) {
+                      return SkeletonCard(
+                        height: widget.style.cardHeight,
+                        width: widget.style.cardWidth,
+                        borderRadius: BorderRadius.all(Radius.circular(BookStackScreenSize.radius(context, widget.style.cardBorderRadius))),
+                      );
+                    }
+                    final T book = _books[index];
+                    return BookInfoCard(
+                      key: ValueKey<String>(widget.getIdBook(book)),
+                      title: widget.getTitleBook(book),
+                      subTitle: widget.getSubTitleBook(book),
+                      imageUrl: widget.getImageUrlBook(book),
+                      price: widget.getPriceBook(book),
+                      onTapDetailsBook: () => widget.onTapDetailsBook(book),
+                      cardHeight: widget.style.cardHeight,
+                      cardWidth: widget.style.cardWidth,
+                      cardBorderRadius: widget.style.cardBorderRadius,
+                      imageBorderRadius: widget.style.imageBorderRadius,
+                      imageErrorPlaceholder: widget.style.imageErrorPlaceholder,
+                      imageHeight: widget.style.imageHeight,
+                      imagePlaceholder: widget.style.imagePlaceholder,
+                      imagePosition: widget.style.imagePosition,
+                      imageWidth: widget.style.imageWidth,
+                      paddingContent: widget.style.paddingContent,
+                      paddingDescription: widget.style.paddingDescription,
+                      paddingImage: widget.style.paddingImage,
+                    );
+                  },
+                  childCount: widget.isLoading ? 6 : _books.length,
+                ),
+              ),
+            ),
           if (_isLoadingMore)
             SliverToBoxAdapter(
               child: Padding(
