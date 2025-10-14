@@ -23,6 +23,12 @@ class BookStackColors {
   /// Color: #1e293b
   static const Color darkCardSurface = Color(0xFF1E293B);
 
+  /// Color: #CBD5E1
+  static const Color darkIcon = Color(0xFFCBD5E1);
+
+  /// Color: #1e293b
+  static const Color darkInputBackground = Color(0xFF1E293B);
+
   /// Color: #000000
   static const Color darkPrimaryBackground = Color(0xFF000000);
 
@@ -40,6 +46,12 @@ class BookStackColors {
 
   /// Color: #ffffff
   static const Color lightCardSurface = Color(0xFFFFFFFF);
+
+  /// Color: #475569
+  static const Color lightIcon = Color(0xFF475569);
+
+  /// Color: #e2e8f0
+  static const Color lightInputBackground = Color(0xFFE2E8F0);
 
   /// Color: #e5e7eb
   static const Color lightPrimaryBackground = Color(0xFFE5E7EB);
