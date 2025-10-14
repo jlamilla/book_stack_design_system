@@ -1,6 +1,6 @@
 name: book_stack_design_system
-description: "A new Flutter package project."
-version: 0.1.0
+description: "Book Stack Design System is a modular Flutter package implementing Atomic Design principles. It provides reusable UI components (atoms, molecules, organisms, templates), comprehensive theme management for light and dark modes, and supports customizable book-related screens, structured logging, and asset integration for scalable app development."
+version: 0.2.0
 homepage: null
 
 environment:
