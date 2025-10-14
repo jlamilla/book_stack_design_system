@@ -39,27 +39,10 @@ flutter:
   assets:
     - lib/assets/colors/
     - lib/assets/icons/
-    - lib/assets/mocks/
-  fonts:
-    - family: Akkurat_Pro
-      fonts:
-        - asset: lib/assets/fonts/Akkurat_Pro/AkkBd_Pro_1.otf
-        - asset: lib/assets/fonts/Akkurat_Pro/AkkRg_Pro_1.otf
-    - family: GT_Pressura_Mono
-      fonts:
-        - asset: lib/assets/fonts/GT_Pressura_Mono/gt-pressura-mono-regular.ttf
-        - asset: lib/assets/fonts/GT_Pressura_Mono/gt-pressura-mono-regular-italic.ttf
-        - asset: lib/assets/fonts/GT_Pressura_Mono/gt-pressura-mono-light.ttf
-        - asset: lib/assets/fonts/GT_Pressura_Mono/gt-pressura-mono-light-italic.ttf
-        - asset: lib/assets/fonts/GT_Pressura_Mono/gt-pressura-mono-bold.ttf
-        - asset: lib/assets/fonts/GT_Pressura_Mono/gt-pressura-mono-bold-italic.ttf
+    - lib/assets/images/
 
 flutter_gen:
   output: lib/designs/atomic/tokens/src/gen
-  fonts:
-    enabled: true
-    outputs:
-      class_name: FontFamilyToken
   integrations:
     flutter_svg: true
   assets:
