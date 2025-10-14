@@ -1,13 +1,13 @@
 import 'package:book_stack_design_system/designs/atomic/atoms/skeletons/skeleton_card.dart';
-import 'package:book_stack_design_system/designs/atomic/molecules/informative_components/informative_component.dart';
 import 'package:book_stack_design_system/designs/atomic/molecules/buttons/button_text_icon.dart';
+import 'package:book_stack_design_system/designs/atomic/molecules/informative_components/informative_component.dart';
 import 'package:book_stack_design_system/designs/atomic/templates/books/books_list_info_template/books_list_info_template.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('BooksListInfoTemplate Template', () {
-    testWidgets('renders correctly with sample parameters', (tester) async {
+    testWidgets('renders correctly with sample parameters', (WidgetTester tester) async {
       final List<Map<String, String>> books = <Map<String, String>>[
         <String, String>{
           'id': '1',
@@ -38,13 +38,13 @@ void main() {
         ),
       );
       expect(
-        find.byWidgetPredicate((widget) => widget.runtimeType.toString().startsWith('BooksListInfoTemplate')),
+        find.byWidgetPredicate((Widget widget) => widget.runtimeType.toString().startsWith('BooksListInfoTemplate')),
         findsOneWidget,
       );
       expect(find.text('Sample Book'), findsOneWidget);
     });
 
-    testWidgets('shows loading skeletons when isLoading is true', (tester) async {
+    testWidgets('shows loading skeletons when isLoading is true', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: MediaQuery(
@@ -69,7 +69,7 @@ void main() {
       expect(find.byType(SkeletonCard), findsWidgets);
     });
 
-    testWidgets('shows error state when error is true', (tester) async {
+    testWidgets('shows error state when error is true', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: MediaQuery(
@@ -94,7 +94,7 @@ void main() {
       expect(find.byType(InformativeComponent), findsWidgets);
     });
 
-    testWidgets('shows empty state in favorite mode', (tester) async {
+    testWidgets('shows empty state in favorite mode', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: MediaQuery(
@@ -119,7 +119,7 @@ void main() {
       expect(find.byType(InformativeComponent), findsWidgets);
     });
 
-    testWidgets('shows sort dropdown when visibilitySorts is true', (tester) async {
+    testWidgets('shows sort dropdown when visibilitySorts is true', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: MediaQuery(
@@ -136,7 +136,7 @@ void main() {
                 onLoadMore: () async => <Map<String, String>>[],
                 hasMore: false,
                 visibilitySorts: true,
-                sortOptions: const ['Price', 'Title'],
+                sortOptions: const <String>['Price', 'Title'],
               ),
             ),
           ),
@@ -148,7 +148,7 @@ void main() {
       expect(find.text('Title'), findsAtLeastNWidgets(1));
     });
 
-    testWidgets('shows favorites button when visibilityFavorite is true', (tester) async {
+    testWidgets('shows favorites button when visibilityFavorite is true', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: MediaQuery(
@@ -174,7 +174,7 @@ void main() {
       expect(find.text('Favorites'), findsOneWidget);
     });
 
-    testWidgets('loads more books on scroll', (tester) async {
+    testWidgets('loads more books on scroll', (WidgetTester tester) async {
       bool loadMoreCalled = false;
       await tester.pumpWidget(
         MaterialApp(
@@ -182,7 +182,7 @@ void main() {
             data: const MediaQueryData(size: Size(400, 800)),
             child: Scaffold(
               body: BooksListInfoTemplate<Map<String, String>>(
-                booksList: List.generate(50, (i) => {'id': '$i', 'title': 'Book $i', 'subtitle': '', 'imageUrl': '', 'price': ''}),
+                booksList: List<Map<String, String>>.generate(50, (int i) => <String, String>{'id': '$i', 'title': 'Book $i', 'subtitle': '', 'imageUrl': '', 'price': ''}),
                 getIdBook: (Map<String, String> book) => book['id']!,
                 getTitleBook: (Map<String, String> book) => book['title']!,
                 getSubTitleBook: (Map<String, String> book) => book['subtitle']!,
@@ -202,7 +202,7 @@ void main() {
         ),
       );
       await tester.pump();
-      final scrollable = find.byType(Scrollable);
+      final Finder scrollable = find.byType(Scrollable);
       final ScrollableState scrollState = tester.state<ScrollableState>(scrollable);
       scrollState.position.jumpTo(scrollState.position.maxScrollExtent);
       for (int i = 0; i < 10; i++) {

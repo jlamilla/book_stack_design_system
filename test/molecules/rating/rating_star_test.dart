@@ -43,7 +43,7 @@ void main() {
           home: Scaffold(
             body: RatingStar(
               globalRating: 2,
-              onRatingChange: (rating) => tappedRating = rating,
+              onRatingChange: (int rating) => tappedRating = rating,
             ),
           ),
         ),

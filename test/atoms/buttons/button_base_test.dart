@@ -132,7 +132,7 @@ void main() {
       matching: find.byType(Padding),
     ));
     final Padding correctPadding = paddings.firstWhere(
-      (p) => p.padding == padding,
+      (Padding p) => p.padding == padding,
       orElse: () => throw StateError('No Padding with expected value found'),
     );
     expect(correctPadding.padding, padding);

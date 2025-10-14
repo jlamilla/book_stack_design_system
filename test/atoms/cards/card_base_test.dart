@@ -25,7 +25,7 @@ void main() {
         ),
       );
       final Container container = tester.widget<Container>(find.byType(Container));
-      final BoxDecoration decoration = container.decoration as BoxDecoration;
+      final BoxDecoration decoration = container.decoration! as BoxDecoration;
       expect(decoration.color, color);
     });
 
@@ -39,7 +39,7 @@ void main() {
         ),
       );
       final Container container = tester.widget<Container>(find.byType(Container));
-      final BoxDecoration decoration = container.decoration as BoxDecoration;
+      final BoxDecoration decoration = container.decoration! as BoxDecoration;
       expect(decoration.boxShadow, shadow);
     });
 
@@ -53,7 +53,7 @@ void main() {
         ),
       );
       final Container container = tester.widget<Container>(find.byType(Container));
-      final BoxDecoration decoration = container.decoration as BoxDecoration;
+      final BoxDecoration decoration = container.decoration! as BoxDecoration;
       expect(decoration.borderRadius, isNotNull);
     });
 
@@ -99,7 +99,7 @@ void main() {
         ),
       );
       final Container container = tester.widget<Container>(find.byType(Container));
-      final BoxDecoration decoration = container.decoration as BoxDecoration;
+      final BoxDecoration decoration = container.decoration! as BoxDecoration;
       expect(decoration.color, isNotNull);
       expect(decoration.borderRadius, isNotNull);
       final Iterable<Padding> paddings = tester.widgetList<Padding>(find.byType(Padding));
