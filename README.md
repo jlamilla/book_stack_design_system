@@ -1,10 +1,10 @@
 
-````markdown
 # 📚 Book Stack Design System [0.2.0] ![Coverage](coverage_badge.svg)
 
 Book Stack Design System is a **modular Flutter package** implementing **Atomic Design principles**.  
 It provides reusable UI components (atoms, molecules, organisms, templates), comprehensive theme management, and book-oriented templates for scalable Flutter applications.
 
+---
 
 ## 🚀 Features
 
@@ -16,8 +16,6 @@ It provides reusable UI components (atoms, molecules, organisms, templates), com
 - 📐 **Responsive tokens and layout utilities**  
 - 📚 **Book-focused templates**: Grid, detail, and category views  
 - 🔌 **Easy integration** into any Flutter app
-
----
 
 ## 🛠️ Getting Started
 
@@ -80,45 +78,6 @@ BookInfoCard(
   imageUrl: 'assets/images/cover.png',
 );
 ```
-
----
-
-## 🧪 Testing and Coverage
-
-### Run all widget tests with coverage:
-
-```bash
-make coverage
-```
-
-This command will:
-
-* Run all widget tests using `flutter test --coverage`
-* Generate `coverage/lcov.info`
-* Create a dynamic badge (`coverage_badge.svg`) for your README
-
-Result:
-
-![Coverage](coverage_badge.svg)
-
----
-
-### Generate and view the HTML coverage report
-
-To generate a browsable coverage report:
-
-```bash
-make html_report
-```
-
-Then open:
-
-```
-coverage/html/index.html
-```
-
-This provides a full visual coverage breakdown.
-
 ---
 
 ## 🧰 Development Workflow
@@ -167,8 +126,3 @@ Software Engineer | Flutter Semi-Senior
 [GitHub Profile](https://github.com/jlamilla)
 
 ---
-
-## 🪪 License
-
-This project is licensed under the **MIT License**.
-See the [LICENSE](LICENSE) file for more information.
