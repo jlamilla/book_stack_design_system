@@ -8,6 +8,7 @@ import 'atoms/skeletons/skeleton_card_test.dart' as skeleton_card_test;
 import 'atoms/texts/book_stack_text_test.dart' as book_stack_text_test;
 import 'molecules/buttons/button_text_icon_test.dart' as button_text_icon_test;
 import 'molecules/cards/card_image_description_test.dart' as card_image_description_test;
+import 'molecules/filters/favorite_sort_test.dart' as favorite_sort_test;
 import 'molecules/informative_components/informative_component_test.dart' as informative_component_test;
 import 'molecules/rating/rating_star_test.dart' as rating_star_test;
 import 'organisms/cards/book_info_card_test.dart' as book_info_card_test;
@@ -32,6 +33,7 @@ void main() {
       card_image_description_test.main();
       informative_component_test.main();
       rating_star_test.main();
+      favorite_sort_test.main();
     });
     group('organisms', () {
       book_info_card_test.main();

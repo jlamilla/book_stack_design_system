@@ -1,11 +1,9 @@
 import 'package:book_stack_design_system/designs/atomic/atoms/skeletons/skeleton_card.dart';
 import 'package:book_stack_design_system/designs/atomic/atoms/texts/book_stack_text.dart';
-import 'package:book_stack_design_system/designs/atomic/molecules/buttons/button_text_icon.dart';
+import 'package:book_stack_design_system/designs/atomic/molecules/filters/favorite_sort.dart';
 import 'package:book_stack_design_system/designs/atomic/molecules/informative_components/informative_component.dart';
 import 'package:book_stack_design_system/designs/atomic/organisms/cards/book_info_card.dart';
 import 'package:book_stack_design_system/designs/atomic/templates/books/books_list_info_template/books_list_info_template_style.dart';
-import 'package:book_stack_design_system/designs/atomic/theme/book_stack_theme.dart';
-import 'package:book_stack_design_system/designs/atomic/tokens/src/gen/assets.gen.dart';
 import 'package:book_stack_design_system/designs/responsive/screen_size.dart';
 import 'package:flutter/material.dart';
 
@@ -193,66 +191,21 @@ class _BooksListInfoTemplateState<T> extends State<BooksListInfoTemplate<T>> {
         slivers: <Widget>[
           if (widget.visibilityFavorite || widget.visibilitySorts)
             SliverToBoxAdapter(
-              child: Padding(
-                padding: BookStackScreenSize.fromLTRB(
-                  context,
-                  top: 60 + MediaQuery.of(context).padding.top,
-                  right: 24,
-                  left: 24,
-                  bottom: 16,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    if (widget.visibilityFavorite)
-                      ButtonTextIcon(
-                        width: widget.isFavorite ? null : BookStackScreenSize.width(context, 155),
-                        borderRadius: 8,
-                        paddingContent: BookStackScreenSize.symmetric(
-                          context,
-                          horizontal: 16,
-                          vertical: 4,
-                        ),
-                        height: BookStackScreenSize.height(context, 52),
-                        type: ButtonTextIconType.custom,
-                        text: 'Favorites',
-                        icon: BookStackAssets.lib.assets.icons.heart.svg(
-                          package: 'book_stack_design_system',
-                          width: BookStackScreenSize.width(context, 27),
-                          height: BookStackScreenSize.width(context, 27),
-                          color: widget.isFavorite ? BookStackTheme.favoriteColor : BookStackTheme.iconColor(context),
-                        ),
-                        onPressed: widget.onTapFavorites,
-                        backgroundColor: widget.isFavorite ? BookStackTheme.favoriteColor.withOpacity(0.20) : Theme.of(context).cardColor,
-                      ),
-                    if (widget.sortOptions != null && widget.sortOptions!.isNotEmpty && widget.visibilitySorts)
-                      DropdownMenu<String>(
-                        initialSelection: _selectedSort,
-                        inputDecorationTheme: Theme.of(context).inputDecorationTheme.copyWith(
-                          contentPadding: BookStackScreenSize.fromLTRB(
-                            context,
-                            left: 8,
-                            top: 12,
-                            bottom: 12,
-                          ),
-                        ),
-                        onSelected: (String? newValue) {
-                          setState(() {
-                            _selectedSort = newValue;
-                          });
-                          if (newValue != null && widget.onSortChanged != null) {
-                            widget.onSortChanged!(newValue);
-                          }
-                        },
-                        dropdownMenuEntries: widget.sortOptions!.map((String value) {
-                          return DropdownMenuEntry<String>(
-                            value: value,
-                            label: value,
-                          );
-                        }).toList(),
-                      ),
-                  ],
-                ),
+              child: FavoriteSort(
+                visibilityFavorite: widget.visibilityFavorite,
+                isFavorite: widget.isFavorite,
+                onTapFavorites: widget.onTapFavorites,
+                visibilitySorts: widget.visibilitySorts,
+                initialSort: _selectedSort,
+                sortOptions: widget.sortOptions,
+                onSortChanged: (String newSort) {
+                  setState(() {
+                    _selectedSort = newSort;
+                  });
+                  if (widget.onSortChanged != null) {
+                    widget.onSortChanged!(newSort);
+                  }
+                },
               ),
             ),
           if (widget.error && _books.isEmpty)

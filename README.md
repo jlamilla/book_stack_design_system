@@ -29,7 +29,8 @@ Add this dependency to your `pubspec.yaml`:
 dependencies:
   book_stack_design_system:
     git:
-      url: https://github.com/jlamilla/book_stack_design_system.git
+      url: https://github.com/jlamilla/book_stack_design_system
+      ref: main
 ````
 
 Then run:
