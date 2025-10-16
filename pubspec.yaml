@@ -4,7 +4,7 @@ description: "Book Stack Design System is a modular Flutter package implementing
   molecules, organisms, templates), comprehensive theme management for light and
   dark modes, and supports customizable book-related screens, structured
   logging, and asset integration for scalable app development."
-version: 0.2.0
+version: 0.2.1
 homepage: null
 
 environment:

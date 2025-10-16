@@ -38,3 +38,10 @@ All notable changes to this project will be documented in this file.
 - Improved documentation and structure for SkeletonCard and ButtonBase
 - Enhanced asset generation classes
 - Removed unused widgets and assets
+
+---
+
+## [0.2.1] - 2025-10-15
+### Added
+
+- Implement FavoriteSort molecule and integrate into books list template
