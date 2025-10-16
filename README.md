@@ -133,7 +133,7 @@ coverage/
 
 **José David Lamilla Acevedo**
 Software Engineer | Flutter Semi-Senior
-[🌐 GitHub Profile](https://github.com/jlamilla) • [📄 CV (PDF)](https://drive.google.com/your-cv-link-here)
+[🌐 GitHub Profile](https://github.com/jlamilla) • [📄 CV (PDF)](https://github.com/jlamilla/jlamilla/blob/main/assets/cv_jose_david_lamilla.pdf)
 
 ---
 
